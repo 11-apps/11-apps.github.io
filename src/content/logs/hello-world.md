@@ -37,4 +37,10 @@ tags: ["meta", "prompt-engineering"]
 
 > 현재까지 입력한 프롬프트를 @[src/content/logs/hello-world.md] 에 업데이트해줘
 
+> commit and push
+
+> 블로그 정보에 https://x.com/11apps_1year 연결
+
+> 블로그 정보에 11-apps github organization 연결
+
 Agentic Coding의 시작입니다!
