@@ -1,1 +1,11 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Remove default quotes from blockquotes in typography plugin */
+.prose blockquote p:first-of-type::before {
+  content: none;
+}
+
+.prose blockquote p:last-of-type::after {
+  content: none;
+}
