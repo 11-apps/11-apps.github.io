@@ -22,4 +22,19 @@ tags: ["meta", "prompt-engineering"]
 
 > blockquote 안에 quotemark 가 중복으로 표시되고 있는데 생략하게 해줘
 
+> 현재까지 변경사항을 commit 하고 origin 에 push 해줘
+
+> gh-pages 를 이용하여 배포해줘
+
+> github.io 에서 페이지를 볼 때 https://11-apps.github.io/_astro/_slug_.BcYyBUYi.css 파일이 404 로 표시되는 이유는 뭘까?
+
+> 현재 변경사항을 commit
+
+> workflow error 
+> Check failure on line 6 in .github/workflows/deploy.yml
+
+> commit and push
+
+> 현재까지 입력한 프롬프트를 @[src/content/logs/hello-world.md] 에 업데이트해줘
+
 Agentic Coding의 시작입니다!
