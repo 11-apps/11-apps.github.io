@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const recentLogs = (await getCollection('logs'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const recentArticles = (await getCollection('articles'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout title="11 apps in 1 year">
+	<section class="mb-12">
+        <h1 class="text-4xl font-bold tracking-tight text-gray-900 mb-4">Welcome</h1>
+        <p class="text-lg text-gray-600 max-w-2xl">
+            A personal space for my daily logs and long-term articles.
+        </p>
+    </section>
+
+    <div class="grid md:grid-cols-2 gap-12">
+        <section>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Recent Logs</h2>
+                <a href="/logs" class="text-sm font-medium text-blue-600 hover:text-blue-800">View all &rarr;</a>
+            </div>
+            <ul class="space-y-4">
+                {recentLogs.map((log) => (
+                    <li>
+                        <a href={`/logs/${log.slug}`} class="block group">
+                            <span class="block text-sm text-gray-500 mb-1">
+                                {log.data.date.toLocaleDateString()}
+                            </span>
+                            <h3 class="text-lg font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+                                {log.data.title}
+                            </h3>
+                        </a>
+                    </li>
+                ))}
+                {recentLogs.length === 0 && <p class="text-gray-500 italic">No logs yet.</p>}
+            </ul>
+        </section>
+
+        <section>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Latest Articles</h2>
+                <a href="/articles" class="text-sm font-medium text-blue-600 hover:text-blue-800">View all &rarr;</a>
+            </div>
+            <ul class="space-y-6">
+                {recentArticles.map((article) => (
+                    <li>
+                        <a href={`/articles/${article.slug}`} class="block group">
+                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
+                                {article.data.title}
+                            </h3>
+                            <p class="text-gray-600 line-clamp-2">
+                                {article.data.description}
+                            </p>
+                            <span class="inline-block mt-2 text-xs font-semibold uppercase tracking-wider text-gray-500">
+                                {article.data.pubDate.toLocaleDateString()}
+                            </span>
+                        </a>
+                    </li>
+                ))}
+                {recentArticles.length === 0 && <p class="text-gray-500 italic">No articles yet.</p>}
+            </ul>
+        </section>
+    </div>
+</BaseLayout>

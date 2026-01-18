@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const logs = (await getCollection('logs')).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<BaseLayout title="Logs">
+	<h1 class="text-3xl font-bold mb-8">Logs</h1>
+	<ul class="space-y-8 max-w-2xl">
+		{logs.map((log) => (
+			<li class="border-b border-gray-100 pb-8 last:border-0">
+				<a href={`/logs/${log.slug}`} class="block group">
+                    <div class="flex items-baseline gap-4 mb-2">
+                        <time datetime={log.data.date.toISOString()} class="text-sm text-gray-500 font-mono">
+                            {log.data.date.toLocaleDateString()}
+                        </time>
+                        <h2 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                            {log.data.title}
+                        </h2>
+                    </div>
+				</a>
+			</li>
+		))}
+        {logs.length === 0 && <p class="text-gray-500">No logs found.</p>}
+	</ul>
+</BaseLayout>
